@@ -12,7 +12,7 @@ const NoteContent = ({ value }: NoteContentProps) => {
     } else {
       setContent(value.split(' ').slice(0, 75).join(' '))
     }
-  }, [showMore])
+  }, [showMore,value])
   return (
     <p className="text-base text-gray-600 font-normal leading-5 text-justify">
       {content}

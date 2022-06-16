@@ -3,15 +3,58 @@ import NavBrand from 'components/atoms/NavBrand'
 import TabBar from 'components/molecules/TabBar'
 import TabItem from 'components/atoms/TabItem'
 import DefaultLayout from 'components/templates/DefaultLayout'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SearchInput from 'components/atoms/input/SearchInput'
 import Button from 'components/atoms/button/Button'
 import NoteCard from 'components/molecules/NoteCard'
 import NoteList from 'components/organisms/NoteList'
-import Note from 'components/molecules/Note'
+import NoteBody from 'components/molecules/NoteBody'
+import NoteAction from 'components/molecules/NoteAction'
+import IconButton from 'components/atoms/button/IconButton'
+import { FiEdit, FiTrash2 } from 'react-icons/fi'
+import { MdArchive, MdUnarchive } from 'react-icons/md'
+import { getFormattedDate, getInitialData, Note } from 'utils'
 function App() {
+  const [notes, setNotes] = useState<Note[]>(getInitialData)
+  const [archivedNotes, setArchivedNotes] = useState<Note[]>([])
+  const [activeNotes, setActiveNotes] = useState<Note[]>([])
   const [activeNoteTabSelected, setActiveNoteTabSelected] = useState(true)
   const [searchValue, setSearchValue] = useState('')
+
+  useEffect(() => {
+    setActiveNotes(
+      notes.filter(
+        (note) =>
+          note.archived === false &&
+          note.title.match(new RegExp(searchValue, 'gi'))
+      )
+    )
+    setArchivedNotes(
+      notes.filter(
+        (note) =>
+          note.archived === true &&
+          note.title.match(new RegExp(searchValue, 'gi'))
+      )
+    )
+  }, [notes, searchValue])
+  const findById = (id: number) => {
+    const noteIndex = notes.findIndex((note) => note.id === id)
+    return { data: notes[noteIndex], index: noteIndex }
+  }
+  const archiveNote = (id: number) => {
+    const note = findById(id)
+    note.data.archived = true
+    const currentNotes = [...notes]
+    currentNotes.splice(note.index, 1, note.data)
+    setNotes(currentNotes)
+  }
+  const unarchiveNote = (id: number) => {
+    const note = findById(id)
+    note.data.archived = false
+    const currentNotes = [...notes]
+    currentNotes.splice(note.index, 1, note.data)
+    setNotes(currentNotes)
+  }
   return (
     <DefaultLayout>
       <Header>
@@ -41,20 +84,59 @@ function App() {
       </div>
       <main className="flex-grow overflow-y-auto">
         <NoteList>
-          <NoteCard borderLeftNumber={0}>
-            <Note
-              title="Asyncronous Concepts on Javasript"
-              date="Kamis, 16 Juni 2022"
-              content={`Asynchronous means that things can happen independently of the main program flow. In the current consumer computers, every program runs for a specific time slot and then it stops its execution to let another program continue their execution. This thing runs in a cycle so fast that it's impossible to notice. We think our computers run many programs simultaneously, but this is an illusion (except on multiprocessor machines). Programs internally use interrupts, a signal that's emitted to the processor to gain the attention of the system. Let's not go into the internals of this now, but just keep in mind that it's normal for programs to be asynchronous and halt their execution until they need attention, allowing the computer to execute other things in the meantime. When a program is waiting for a response from the network, it cannot halt the processor until the request finishes. Normally, programming languages are synchronous and some provide a way to manage asynchronicity in the language or through libraries. C, Java, C#, PHP, Go, Ruby, Swift, and Python are all synchronous by default. Some of them handle async operations by using threads, spawning a new process.`}
-            />
-          </NoteCard>
-          <NoteCard borderLeftNumber={0}>
-            <Note
-              title="WASM"
-              date="Kamis, 16 Juni 2022"
-              content={`WebAssembly (sometimes abbreviated Wasm) defines a portable binary-code format and a corresponding text format for executable programs as well as software interfaces for facilitating interactions between such programs and their host environment. WebAssembly.`}
-            />
-          </NoteCard>
+          {activeNoteTabSelected
+            ? activeNotes.map((note, index) => {
+                return (
+                  <NoteCard borderLeftNumber={index} key={note.id}>
+                    <NoteBody
+                      title={note.title}
+                      date={getFormattedDate(note.createdAt)}
+                      content={note.body}
+                    />
+                    <NoteAction>
+                      <IconButton theme="primary" tooltip="Edit">
+                        <FiEdit />
+                      </IconButton>
+                      <IconButton theme="danger" tooltip="Hapus">
+                        <FiTrash2 />
+                      </IconButton>
+                      <IconButton
+                        theme="info"
+                        tooltip="Arsipkan"
+                        onClick={() => archiveNote(note.id)}
+                      >
+                        <MdArchive />
+                      </IconButton>
+                    </NoteAction>
+                  </NoteCard>
+                )
+              })
+            : archivedNotes.map((note, index) => {
+                return (
+                  <NoteCard borderLeftNumber={index} key={note.id}>
+                    <NoteBody
+                      title={note.title}
+                      date={getFormattedDate(note.createdAt)}
+                      content={note.body}
+                    />
+                    <NoteAction>
+                      <IconButton theme="primary" tooltip="Edit">
+                        <FiEdit />
+                      </IconButton>
+                      <IconButton theme="danger" tooltip="Hapus">
+                        <FiTrash2 />
+                      </IconButton>
+                      <IconButton
+                        theme="info"
+                        tooltip="Pindahkan Dari Arsip"
+                        onClick={() => unarchiveNote(note.id)}
+                      >
+                        <MdUnarchive />
+                      </IconButton>
+                    </NoteAction>
+                  </NoteCard>
+                )
+              })}
         </NoteList>
       </main>
       <footer className="text-base text-gray-700 text-center">

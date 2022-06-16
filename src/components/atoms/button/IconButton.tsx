@@ -5,12 +5,14 @@ interface IconButtonProps {
   theme?: 'primary' | 'danger' | 'secondary' | 'info'
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   className?: string
+  tooltip?:string
 }
 const IconButton = ({
   children,
   theme = 'primary',
   onClick = () => {},
   className = '',
+  tooltip = ''
 }: IconButtonProps) => {
   const themeStyle = (() => {
     switch (theme) {
@@ -26,6 +28,7 @@ const IconButton = ({
     <button
       className={`w-fit h-fit rounded text-white text-lg p-2 hover:shadow-lg active:shadow-none transition-all duration-300 ${themeStyle} ${className}`}
       onClick={onClick}
+      title={tooltip}
     >
       {children}
     </button>

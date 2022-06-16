@@ -43,7 +43,7 @@ module.exports = {
       rose: colors.rose,
       primary: colors.teal,
       danger: colors.red,
-      info: colors.sky,
+      info: colors.indigo,
     }),
     columns: {
       auto: 'auto',
