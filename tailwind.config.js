@@ -43,7 +43,7 @@ module.exports = {
       rose: colors.rose,
       primary: colors.teal,
       danger: colors.red,
-      info: colors.sky
+      info: colors.sky,
     }),
     columns: {
       auto: 'auto',
@@ -146,6 +146,7 @@ module.exports = {
       'gradient-to-l': 'linear-gradient(to left, var(--tw-gradient-stops))',
       'gradient-to-tl':
         'linear-gradient(to top left, var(--tw-gradient-stops))',
+      'close-icon': 'url("../../public/x.svg")',
     },
     backgroundOpacity: ({ theme }) => theme('opacity'),
     backgroundPosition: {
