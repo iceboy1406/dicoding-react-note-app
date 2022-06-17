@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 interface ModalCardProps {
   children: ReactNode
   visible: boolean
@@ -6,7 +6,7 @@ interface ModalCardProps {
 const ModalCard = ({ children, visible }: ModalCardProps) => {
   return (
     <div
-      className={`w-full max-w-[420px] bg-gray-50 p-6 rounded ${
+      className={`w-full max-w-[500px] bg-gray-50 p-6 rounded ${
         visible ? ' flex flex-col gap-4 animate-fadeDown' : 'hidden'
       }`}
     >

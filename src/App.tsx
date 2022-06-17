@@ -292,6 +292,7 @@ function App() {
               />
             </div>
             <TextArea
+              rows={8}
               value={noteBodyValue}
               onChange={(e) =>
                 setNoteBodyValue(
@@ -358,7 +359,7 @@ function App() {
               }
               placeholder="Isi Catatan"
               required
-              rows={6}
+              rows={8}
             />
             <Button type="submit">Simpan</Button>
           </form>
