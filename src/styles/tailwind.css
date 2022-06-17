@@ -7,9 +7,11 @@
   html {
     font-family: 'Nunito', sans-serif;
   }
+  * {
+    @apply focus:outline-4 focus:outline-primary-400;
+  }
   input,
-  textarea,
-  button {
+  textarea {
     @apply outline-none focus:outline-none;
   }
   ::-webkit-search-cancel-button {
