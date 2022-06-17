@@ -12,7 +12,7 @@ const TabItem = ({
   return (
     <button
       type="button"
-      className={`px-4 py-3 md:px-7 rounded select-none ${
+      className={`px-4 py-2.5 md:px-7 rounded select-none ${
         active
           ? 'bg-primary-500 text-white'
           : 'bg-transparent text-gray-600 hover:bg-gray-200'

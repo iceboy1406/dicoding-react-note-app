@@ -10,7 +10,7 @@ interface NoteBodyProps {
 const NoteBody = ({ content, date, title }: NoteBodyProps) => {
   return (
     <article className="flex flex-col gap-3">
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-0.5">
         <NoteTitle value={title} />
         <NoteDate value={date} />
       </div>

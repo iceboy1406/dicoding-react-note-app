@@ -7,8 +7,10 @@
   html {
     font-family: 'Nunito', sans-serif;
   }
-  input {
-    @apply focus:outline-none;
+  input,
+  textarea,
+  button {
+    @apply outline-none focus:outline-none;
   }
   ::-webkit-search-cancel-button {
     @apply w-3 h-3 cursor-pointer;
@@ -21,12 +23,11 @@
 
   /* Track */
   ::-webkit-scrollbar-track {
-    @apply bg-gray-500/[.15]
+    @apply bg-gray-500/[.15];
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
     @apply bg-gray-500 rounded-2xl max-h-6 hover:bg-gray-600;
   }
-
 }

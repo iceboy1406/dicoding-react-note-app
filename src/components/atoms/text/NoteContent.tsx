@@ -10,13 +10,13 @@ const NoteContent = ({ value }: NoteContentProps) => {
     if (showMore) {
       setContent(value)
     } else {
-      setContent(value.split(' ').slice(0, 75).join(' '))
+      setContent(value.split(' ').slice(0, 65).join(' '))
     }
   }, [showMore,value])
   return (
-    <p className="text-base text-gray-600 font-normal leading-5 text-justify">
+    <p className="text-base text-gray-600 font-normal leading-5">
       {content}
-      {value.split(' ').length > 75 ? (
+      {value.split(' ').length > 65 ? (
         <>
           <button
             type="button"

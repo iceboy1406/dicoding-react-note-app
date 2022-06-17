@@ -21,9 +21,9 @@ const NoteCard = ({ children, borderLeftNumber }: NoteCardProps) => {
       case 5:
         return 'border-l-orange-500'
       case 6:
-        return 'border-l-amber-500'
-      case 7:
         return 'border-l-violet-500'
+      case 7:
+        return 'border-l-amber-500'
       case 8:
         return 'border-l-green-500'
       case 9:

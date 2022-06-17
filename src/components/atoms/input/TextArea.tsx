@@ -1,15 +1,16 @@
 import React, { ForwardedRef, forwardRef } from 'react'
-interface TextInputProps {
+interface TextAreaProps {
   id?: string
   placeholder?: string
   value: string
-  onChange: React.ChangeEventHandler<HTMLInputElement>
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement>
   className?: string
-  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>
-  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>
+  onKeyUp?: React.KeyboardEventHandler<HTMLTextAreaElement>
+  onKeyDown?: React.KeyboardEventHandler<HTMLTextAreaElement>
   required?: boolean
+  rows?: number
 }
-const TextInput = forwardRef(
+const TextArea = forwardRef(
   (
     {
       id,
@@ -20,13 +21,13 @@ const TextInput = forwardRef(
       onKeyUp,
       onKeyDown,
       required,
-    }: TextInputProps,
-    ref: ForwardedRef<HTMLInputElement>
+      rows = 5
+    }: TextAreaProps,
+    ref: ForwardedRef<HTMLTextAreaElement>
   ) => {
     return (
-      <input
+      <textarea
         ref={ref}
-        type="text"
         id={id}
         className={`bg-white text-base text-gray-600 placeholder:text-gray-500 flex-grow px-5 py-2.5 rounded border border-transparent focus:border-primary-500 ${className}`}
         placeholder={placeholder}
@@ -35,11 +36,11 @@ const TextInput = forwardRef(
         autoComplete={'off'}
         onKeyUp={onKeyUp}
         onKeyDown={onKeyDown}
+        rows={rows}
         required={required}
-      />
+      ></textarea>
     )
   }
 )
 
-export default TextInput
-export type { TextInputProps }
+export default TextArea

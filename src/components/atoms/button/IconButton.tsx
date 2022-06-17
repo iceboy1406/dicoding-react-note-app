@@ -26,7 +26,7 @@ const IconButton = ({
   })()
   return (
     <button
-      className={`w-fit h-fit rounded text-white text-lg p-2 hover:shadow-lg active:shadow-none transition-all duration-300 ${themeStyle} ${className}`}
+      className={`w-fit h-fit rounded text-white text-lg p-2.5 hover:shadow-lg active:shadow-none transition-all duration-300 ${themeStyle} ${className}`}
       onClick={onClick}
       title={tooltip}
     >
