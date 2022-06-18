@@ -8,7 +8,7 @@
     font-family: 'Nunito', sans-serif;
   }
   * {
-    @apply focus:outline-4 focus:outline-primary-400;
+    @apply focus:outline-4 focus:outline-gray-700;
   }
   input,
   textarea {

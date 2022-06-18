@@ -320,7 +320,7 @@ function App() {
       >
         <ModalCard visible={editNoteModal}>
           <ModalHeader>
-            <ModalTitle value="Buat Catatan" />
+            <ModalTitle value="Edit Catatan" />
             <ModalCloseButton onClick={() => setEditNoteModal(false)} />
           </ModalHeader>
           <form
